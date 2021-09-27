@@ -11,7 +11,7 @@ public class Gun
     private float shootPower = 6;
 
     private int magSize = 6;
-    private int Ammo;
+    private int Ammo = 6;
     public float reloadTime = 1f;
     public bool isReloading;
 
@@ -27,19 +27,22 @@ public class Gun
         if(Ammo > 0)
         {
             //shoot bullet
-            GameObject bullet = GameObject.Instantiate(bulletPrefab, gunObject.transform.position, gunObject.transform.rotation);
+            GameObject bullet = GameObject.Instantiate(bulletPrefab = Resources.Load("BulletPrefab") as GameObject, gunObject.transform.position, gunObject.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * shootPower, ForceMode.Impulse);
             Debug.Log("gun shot");
             Ammo--;
+            //later een keer UI manager maken ofzo?
+            EventManager.Invoke(EventType.AMMO_CHANGED);
+
         }
 
     }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Ammo = magSize;
-        bulletPrefab = Resources.Load("BulletPrefab") as GameObject;
+        
         //EventManager.Subscribe(EventType.GUN_SHOOT, Shoot);
     }
 
