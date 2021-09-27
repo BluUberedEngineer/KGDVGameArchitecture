@@ -54,5 +54,10 @@ public class GameManager : MonoBehaviour
             EventManager.Invoke(EventType.GUN_SHOOT);
             gun.Shoot(gunObject);
         }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            gun.Reload();
+        }
     }
 }
