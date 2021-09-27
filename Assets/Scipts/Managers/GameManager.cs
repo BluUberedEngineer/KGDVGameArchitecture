@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     //The only one with MonoBehaviour
     private static GameManager _instance;
 
+    public GameObject gunObject;
+
     public GameObject PlayerInstance;
     private PlayerMovement playerMovement;
+    private Gun gun;
     private StateMachine<GameManager> stateMachine;
 
     public static GameManager Instance
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         stateMachine = new StateMachine<GameManager>(this);
-
+        gun = new Gun();
         playerMovement = new PlayerMovement(PlayerInstance, transform);
         playerMovement.OnEnter();
     }
@@ -44,5 +47,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         playerMovement.OnUpdate();
+
+        //vervang dit ff met dedicated input manager
+        if (Input.GetMouseButtonDown(0))
+        {
+            EventManager.Invoke(EventType.GUN_SHOOT);
+            gun.Shoot(gunObject);
+        }
     }
 }

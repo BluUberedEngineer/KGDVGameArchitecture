@@ -2,43 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Gun
+public class Gun
 {
-    public GameObject gunObject;
     public GameObject bulletPrefab;
 
     public int damage;
     public float fireRate;
+    private float shootPower = 6;
 
     public float reloadTime;
     public bool isReloading;
 
     public virtual void Reload()
     {
-
+        //do reloading stuff
     }
 
-    public virtual void Shoot()
+    public virtual void Shoot(GameObject gunObject)
     {
         //shoot bullet
-        EventManager<Gun>.Invoke(EventType.GUN_SHOOT, this);
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, gunObject.transform.position, gunObject.transform.rotation);
-        
+        GameObject bullet = GameObject.Instantiate(Resources.Load("BulletPrefab") as GameObject, gunObject.transform.position, gunObject.transform.rotation);
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * shootPower, ForceMode.Impulse);
+        Debug.Log("gun shot");
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        //bulletPrefab = Resources.Load("Assets/Resources/BulletPrefab") as GameObject;
+        //EventManager.Subscribe(EventType.GUN_SHOOT, Shoot);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //vervang dit ff met dedicated input manager
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
+
     }
 }
