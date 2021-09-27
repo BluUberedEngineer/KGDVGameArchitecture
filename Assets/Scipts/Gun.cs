@@ -21,7 +21,7 @@ public abstract class Gun
     public virtual void Shoot()
     {
         //shoot bullet
-
+        EventManager<Gun>.Invoke(EventType.GUN_SHOOT, this);
         GameObject bullet = GameObject.Instantiate(bulletPrefab, gunObject.transform.position, gunObject.transform.rotation);
         
     }
@@ -35,6 +35,10 @@ public abstract class Gun
     // Update is called once per frame
     void Update()
     {
-        
+        //vervang dit ff met dedicated input manager
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
 }
