@@ -11,7 +11,7 @@ public class Gun
 
     public float shootPower = 6;
 
-    private int magSize = 6;
+    public int magSize = 6;
     private int Ammo = 6;
     public float reloadTime = 1f;
     public bool isReloading;
@@ -20,6 +20,8 @@ public class Gun
     private bool waitingForNextShot = false;
     private float shootTimer;
 
+    public Vector3 bulletSize = new Vector3 (0.3f, 0.3f, 0.3f);
+    public Color bulletColor;
     public List<GunModifier> gunModifiers;
 
     public void GunStart(List<GunModifier> _gunModifiers)
@@ -91,6 +93,9 @@ public class Gun
                 GameObject bullet = GameObject.Instantiate(bulletPrefab = Resources.Load("BulletPrefab") as GameObject, gunBarrel.transform.position, gunBarrel.transform.rotation);
                 //add bullet damage to bullet here?
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * shootPower, ForceMode.Impulse);
+                bullet.transform.localScale = bulletSize;
+                bullet.GetComponent<Renderer>().material.SetColor("_Emissive", bulletColor);
+                bullet.GetComponent<ParticleSystem>().startColor = bulletColor;
                 Debug.Log("gun shot");
                 Ammo--;
                 //later een keer UI manager maken ofzo?

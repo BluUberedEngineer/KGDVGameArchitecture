@@ -12,6 +12,6 @@ public class FirerateModifier : GunModifier
     {
         Debug.Log("piew piew firerate");
         tempGun.fireRate *= FireRatemultiplier;
-        base.OnGunShoot();
+        base.OnGunStart();
     }
 }
