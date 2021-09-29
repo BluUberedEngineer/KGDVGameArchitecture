@@ -416,6 +416,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunObject: {fileID: 1668996138}
+  gunModifiers:
+  - {fileID: 11400000, guid: d380ffc37ef55734fb07f5f576b06a55, type: 2}
+  - {fileID: 11400000, guid: ae83a04114e61414a80182a71571ac37, type: 2}
+  - {fileID: 11400000, guid: 58367cf5a0717e346922666fc5aa5dea, type: 2}
   PlayerInstance: {fileID: 1863747545}
 --- !u!4 &969655273
 Transform:
